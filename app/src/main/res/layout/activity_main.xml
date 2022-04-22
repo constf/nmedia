@@ -86,7 +86,7 @@
         tools:layout_editor_absoluteY="295dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageViewed"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
@@ -112,6 +112,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
@@ -136,6 +137,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"
+        android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_share"
         app:layout_constraintStart_toEndOf="@id/textLikes"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
