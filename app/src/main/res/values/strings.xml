@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="string_hello">NMedia!</string>
+    <string name="description_avatar_logo">Avatar logo</string>
+    <string name="text_main">Hello, this is new Netology!\n\nNetology began as an speed-up course for Online-Marketing. Later, we rolled out courses for design, development, analytics and management. We grow and help our students to grow, from fresh starters to confident professionals. Our most important asset remains with us: we beleive that each one of us posesses the power that inspires us to want more, aim higher, run faster. Our mission is in helping to embark on the path of growth and start changing ->  <a href="http://netolo.gy/fyb">http://netolo.gy/fyb</a>></string>
+    <string name="text_published_date">May 21, 18:36</string>
+    <string name="text_netology_motto">Netology: University of internet professions</string>
 </resources>
+
+
