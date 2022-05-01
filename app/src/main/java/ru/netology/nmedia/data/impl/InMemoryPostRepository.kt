@@ -6,16 +6,18 @@ import ru.netology.nmedia.dto.Post
 
 class InMemoryPostRepository : PostRepository {
 
+    private var postId = 1L
+
     override val data = MutableLiveData<List<Post>>(
         List(100) { index ->
             Post(
-                id = index + 1L,
+                id = postId++,
                 "Konstantin",
-                "Post $index created by repository initializer!\nIt consists of 2 strings of text in content field.",
+                "Post ${index+1} created by repository initializer! This post is a test text, just for test purposes.\nIt consists of 2 strings of text in content field.",
                 "April 26, 2022",
                 numLikes = 999,
                 numShares = 9_999_995,
-                numViews = 23_147 + index
+                numViews = 23_195 + index
             )
         }
     )
@@ -57,6 +59,14 @@ class InMemoryPostRepository : PostRepository {
             else it.copy(numViews = it.numViews + 1)
         }
         data.value = viewedPosts
+    }
+
+    override fun remove(id: Long) {
+        data.value = posts.filter { it.id != id }
+    }
+
+    override fun save(post: Post) {
+        data.value = posts + post.copy(id = postId++)
     }
 
 }

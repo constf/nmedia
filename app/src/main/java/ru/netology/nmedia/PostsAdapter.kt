@@ -1,7 +1,8 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,14 +11,16 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostDetailsBinding
 import ru.netology.nmedia.dto.Post
 
-typealias onClickCallback = (id: Long) -> Unit
+typealias onClickCallback = (post: Post) -> Unit
 
-class PostsAdapter(private val onLikeClicker: onClickCallback, private val onShareClicker: onClickCallback) :
-ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
+class PostsAdapter(private val onLikeClicker: onClickCallback,
+                   private val onShareClicker: onClickCallback,
+                   private val onRemoveClicker: onClickCallback
+                   ) : ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = PostDetailsBinding.inflate(inflater)
+        val binding = PostDetailsBinding.inflate(inflater, parent, false)
         return PostViewHolder(binding)
     }
 
@@ -36,10 +39,24 @@ ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
                 numberViewed.text = convertToLiterals(post.numViews)
                 imageLikes.setImageResource(getLikeIcon(post.likedByMe))
                 imageLikes.setOnClickListener {
-                    onLikeClicker(post.id)
+                    onLikeClicker(post)
                 }
                 imageShare.setOnClickListener {
-                    onShareClicker(post.id)
+                    onShareClicker(post)
+                }
+                imageMore.setOnClickListener {
+                    PopupMenu(it.context, it).apply {
+                        inflate(R.menu.post_options)
+                        setOnMenuItemClickListener{ item ->
+                            when(item.itemId){
+                                R.id.remove -> {
+                                    onRemoveClicker(post)
+                                    true
+                                }
+                                else -> false
+                            }
+                        }
+                    }.show()
                 }
             }
         }
@@ -95,4 +112,3 @@ ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
     }
 
 }
-
