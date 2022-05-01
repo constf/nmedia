@@ -45,4 +45,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.activity:activity-ktx:1.4.0"
 
+    // RecyclerView
+    def rcvw_vers = "1.2.1"
+    implementation "androidx.recyclerview:recyclerview:$rcvw_vers"
+
 }
