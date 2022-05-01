@@ -7,7 +7,7 @@ import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.dto.Post
 
 val empty = Post(
-    id = 0,
+    id = 0L,
     content = "",
     author = "",
     likedByMe = false,
@@ -44,6 +44,9 @@ class PostViewModel() : ViewModel() {
         editedPost.value = empty
     }
 
+    fun editPost(post: Post) {
+        editedPost.value = post
+    }
 
 
 }

@@ -66,7 +66,23 @@ class InMemoryPostRepository : PostRepository {
     }
 
     override fun save(post: Post) {
-        data.value = posts + post.copy(id = postId++)
+        if (post.id == 0L){ // Если это новый пост
+            data.value = posts + post.copy(
+                id = postId++,
+                author = "Konstantin",
+                published = "May 1, 2022",
+                likedByMe = false,
+                numLikes = 999,
+                numShares = 9_999_995,
+                numViews = 9_195
+            )
+            return
+        }
+
+        // Редактирование поста
+        data.value = posts.map {
+            if (it.id != post.id) it else post.copy(content = post.content)
+        }
     }
 
 }

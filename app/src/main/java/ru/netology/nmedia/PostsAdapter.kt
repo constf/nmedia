@@ -15,7 +15,8 @@ typealias onClickCallback = (post: Post) -> Unit
 
 class PostsAdapter(private val onLikeClicker: onClickCallback,
                    private val onShareClicker: onClickCallback,
-                   private val onRemoveClicker: onClickCallback
+                   private val onRemoveClicker: onClickCallback,
+                   private val onEditClicker: onClickCallback
                    ) : ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -51,6 +52,10 @@ class PostsAdapter(private val onLikeClicker: onClickCallback,
                             when(item.itemId){
                                 R.id.remove -> {
                                     onRemoveClicker(post)
+                                    true
+                                }
+                                R.id.edit -> {
+                                    onEditClicker(post)
                                     true
                                 }
                                 else -> false
