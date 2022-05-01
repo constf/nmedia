@@ -22,6 +22,8 @@ class PostViewModel() : ViewModel() {
     private val repository: PostRepository = InMemoryPostRepository()
     val data by repository::data
     val editedPost = MutableLiveData(empty)
+    var tempText: String = ""
+    var editingNow: Boolean = false
 
     fun onLikeClicked(post: Post) = repository.like(post.id)
     fun onShareClicked(post: Post) = repository.share(post.id)
@@ -46,6 +48,10 @@ class PostViewModel() : ViewModel() {
 
     fun editPost(post: Post) {
         editedPost.value = post
+    }
+
+    fun setEmptyPostAfterEdit() {
+        editedPost.value = empty
     }
 
 

@@ -37,20 +37,23 @@ class MainActivity : AppCompatActivity() {
                 viewModel.updateEdited(text.toString())
                 viewModel.savePost()
 
-                setText("")
+                setText(viewModel.tempText)
                 clearFocus()
                 AndroidUtils.hideSoftKeyboard(this)
 
                 if (binding.editCancelGroup.isVisible) {
                     binding.editCancelGroup.visibility = View.GONE
                 }
+                viewModel.editingNow = false
             }
         }
 
         binding.editCancelSymbol.setOnClickListener {
             binding.editCancelGroup.visibility = View.GONE
-            binding.newContent.setText("")
+            binding.newContent.setText(viewModel.tempText)
             binding.newContent.clearFocus()
+            viewModel.setEmptyPostAfterEdit()
+            viewModel.editingNow = false
             AndroidUtils.hideSoftKeyboard(binding.newContent)
         }
 
@@ -58,15 +61,21 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
+
         viewModel.editedPost.observe(this) { post ->
             if (post.id == 0L) {
                 return@observe
             }
 
+            // Редкатирование поста
             binding.editCancelGroup.visibility = View.VISIBLE
             binding.editCancelText.setText(post.content.toString())
 
             with(binding.newContent) {
+                if (!viewModel.editingNow) {
+                    viewModel.tempText = text.toString()
+                    viewModel.editingNow = true
+                }
                 setText(post.content)
                 requestFocus()
             }
