@@ -17,7 +17,7 @@ ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = PostDetailsBinding.inflate(inflater)
+        val binding = PostDetailsBinding.inflate(inflater, parent, false)
         return PostViewHolder(binding)
     }
 
