@@ -17,14 +17,17 @@
         app:srcCompat="@drawable/ic_main_logo"
         />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageMore"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24"
+        app:icon="@drawable/ic_baseline_more_vert_24"
+        style="@style/Widget.AppTheme.LikeCheckbox"
+        android:clickable="true"
+        android:checkable="false"
         />
 
     <TextView
@@ -85,74 +88,53 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="295dp" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageViewed"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:srcCompat="@android:drawable/ic_menu_view"
-        app:layout_constraintEnd_toStartOf="@id/numberViewed"
-        app:layout_constraintTop_toTopOf="@id/barrierBottom"
-        app:layout_constraintBottom_toBottomOf="@id/numberViewed"
-        />
-
-    <TextView
-        android:id="@+id/numberViewed"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        style="@style/Widget.AppTheme.LikeCheckbox"
+        app:icon="@android:drawable/ic_menu_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        android:text="500"
+        android:textColor="@color/like_checkbox_tint"
+        android:checkable="false"
+        android:clickable="false"
+        tools:text="   500"
         />
 
-    <ImageView
+
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageLikes"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="true"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+        android:backgroundTint="@color/white"
+        android:textColor="?attr/colorControlNormal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:layout_constraintBottom_toBottomOf="@id/textLikes"
-
+        app:icon="@drawable/ic_like_24"
+        style="@style/Widget.AppTheme.LikeCheckbox"
+        tools:text="   100"
         />
 
-    <TextView
-        android:id="@+id/textLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:layout_constraintStart_toEndOf="@id/imageLikes"
-        android:text="500"
-        />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageShare"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_share"
-        app:layout_constraintStart_toEndOf="@id/textLikes"
-        app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:layout_constraintBottom_toBottomOf="@id/textShare"
-        />
-
-    <TextView
-        android:id="@+id/textShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@id/imageShare"
+        android:layout_marginStart="32dp"
+        app:layout_constraintStart_toEndOf="@id/imageLikes"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        android:text="500"
+        app:icon="@android:drawable/ic_menu_share"
+        style="@style/Widget.AppTheme.LikeCheckbox"
+        android:textColor="@color/like_checkbox_tint"
+        android:checkable="false"
+        android:clickable="true"
+        tools:text="   500"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

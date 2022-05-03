@@ -35,10 +35,12 @@ class PostsAdapter(private val onLikeClicker: onClickCallback,
                 author.text = post.author
                 mainText.text = post.content
                 published.text = post.published
-                textLikes.text = convertToLiterals(post.numLikes)
-                textShare.text = convertToLiterals(post.numShares)
-                numberViewed.text = convertToLiterals(post.numViews)
-                imageLikes.setImageResource(getLikeIcon(post.likedByMe))
+
+                imageShare.text = "   " + convertToLiterals(post.numShares)
+                imageViewed.text = "   " + convertToLiterals(post.numViews)
+                imageLikes.text = "   " + convertToLiterals(post.numLikes)
+                // imageLikes.setButtonDrawable(getLikeIcon(post.likedByMe)) - не нужно, задаётся в XML layout'е
+                imageLikes.isChecked = post.likedByMe
                 imageLikes.setOnClickListener {
                     onLikeClicker(post)
                 }
@@ -66,9 +68,11 @@ class PostsAdapter(private val onLikeClicker: onClickCallback,
             }
         }
 
+        /*   Obsolete now, with usage of MaterialButton, themes/styles and selector!
         @DrawableRes
         private fun getLikeIcon(liked: Boolean) =
             if (liked) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+        */
 
         private fun convertToLiterals(n: Int): String {
             var s: String
