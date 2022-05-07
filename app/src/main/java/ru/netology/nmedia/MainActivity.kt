@@ -37,13 +37,17 @@ class MainActivity : AppCompatActivity() {
                 viewModel.updateEdited(text.toString())
                 viewModel.savePost()
 
-                setText(viewModel.tempText)
                 clearFocus()
                 AndroidUtils.hideSoftKeyboard(this)
 
                 if (binding.editCancelGroup.isVisible) {
                     binding.editCancelGroup.visibility = View.GONE
+                    setText(viewModel.tempText)
+                } else{
+                    binding.newContent.setText("")
+                    //viewModel.setEmptyPostAfterEdit()
                 }
+                viewModel.tempText = ""
                 viewModel.editingNow = false
             }
         }
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         binding.editCancelSymbol.setOnClickListener {
             binding.editCancelGroup.visibility = View.GONE
             binding.newContent.setText(viewModel.tempText)
+            viewModel.tempText = ""
             binding.newContent.clearFocus()
             viewModel.setEmptyPostAfterEdit()
             viewModel.editingNow = false

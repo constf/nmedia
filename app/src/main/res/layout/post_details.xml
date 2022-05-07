@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:checkable="true"
         android:clickable="true"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/design_default_color_background"
         android:textColor="?attr/colorControlNormal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
