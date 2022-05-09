@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.SingleLiveEvent
 
 val empty = Post(
     id = 0L,
@@ -21,13 +22,22 @@ val empty = Post(
 class PostViewModel() : ViewModel() {
     private val repository: PostRepository = InMemoryPostRepository()
     val data by repository::data
-    val editedPost = MutableLiveData(empty)
+    val editedPost = MutableLiveData<Post?>(null)
     var tempText: String = ""
     var editingNow: Boolean = false
 
+    val sharePostContent = SingleLiveEvent<String>()
+    val navigateToPostScreen = SingleLiveEvent<Unit>()
+    val showExternalVideo = SingleLiveEvent<Post>()
+
     fun onLikeClicked(post: Post) = repository.like(post.id)
-    fun onShareClicked(post: Post) = repository.share(post.id)
+
     fun onRemovePost(post: Post) = repository.remove(post.id)
+
+    fun onShareClicked(post: Post) {
+        sharePostContent.value = post.content
+        repository.share(post.id)
+    }
 
     fun updateEdited(content: String) {
         editedPost.value?.let {
@@ -50,8 +60,27 @@ class PostViewModel() : ViewModel() {
         editedPost.value = post
     }
 
-    fun setEmptyPostAfterEdit() {
-        editedPost.value = empty
+
+    fun onCreatePostClicked() {
+        navigateToPostScreen.call()
+    }
+
+    fun onSaveButtonClicked(postContent: String) {
+        if (postContent.isBlank()) return
+
+        val post = editedPost.value?.copy(content = postContent) ?: Post(
+            id = 0L,
+            author = "Me",
+            content = postContent,
+            published = "Today"
+        )
+        repository.save(post)
+
+        editedPost.value = null
+    }
+
+    fun onShowVideo(post: Post) {
+        showExternalVideo.value = post
     }
 
 

@@ -9,4 +9,8 @@
     <string name="remove">Удалить</string>
     <string name="new_message_hint">Новое сообщение...</string>
     <string name="edit">Редактировать</string>
+    <string name="chooser_share_post_string">Поделиться постом</string>
+    <string name="confirm_edited_text_string">Подтвердить отредактированный текст.</string>
+    <string name="add_new_post_string">Добавить новый пост</string>
+    <string name="show_video_string">Показать видео</string>
 </resources>

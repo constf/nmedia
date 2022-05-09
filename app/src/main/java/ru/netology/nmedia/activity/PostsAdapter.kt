@@ -1,9 +1,9 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,8 @@ typealias onClickCallback = (post: Post) -> Unit
 class PostsAdapter(private val onLikeClicker: onClickCallback,
                    private val onShareClicker: onClickCallback,
                    private val onRemoveClicker: onClickCallback,
-                   private val onEditClicker: onClickCallback
+                   private val onEditClicker: onClickCallback,
+                   private val onVideoClicker: onClickCallback
                    ) : ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -64,6 +65,18 @@ class PostsAdapter(private val onLikeClicker: onClickCallback,
                             }
                         }
                     }.show()
+                }
+
+                if (post.ytVideo == null)
+                    showVideoGroup.visibility = View.GONE
+                else{
+                    showVideoGroup.visibility = View.VISIBLE
+                    videoImage.setOnClickListener {
+                        onVideoClicker(post)
+                    }
+                    playVideo.setOnClickListener {
+                        onVideoClicker(post)
+                    }
                 }
             }
         }

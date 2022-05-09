@@ -1,6 +1,7 @@
 package ru.netology.nmedia.data.impl
 
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nmedia.R
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.dto.Post
 
@@ -9,12 +10,13 @@ class InMemoryPostRepository : PostRepository {
     private var postId = 1L
 
     override val data = MutableLiveData<List<Post>>(
-        List(100) { index ->
+        List(20) { index ->
             Post(
                 id = postId++,
                 "Konstantin",
                 "Post ${index+1} created by repository initializer! This post is a test text, just for test purposes.\nIt consists of 2 strings of text in content field.",
                 "April 26, 2022",
+                ytVideo = if (index % 2 == 0) "QUwPzUCjqO8" else null,
                 numLikes = 999,
                 numShares = 9_999_995,
                 numViews = 23_195 + index
@@ -70,10 +72,10 @@ class InMemoryPostRepository : PostRepository {
             data.value = posts + post.copy(
                 id = postId++,
                 author = "Konstantin",
-                published = "May 1, 2022",
+                published = "May 8, 2022",
                 likedByMe = false,
                 numLikes = 999,
-                numShares = 9_999_995,
+                numShares = 9_999_999,
                 numViews = 9_195
             )
             return

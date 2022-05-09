@@ -8,6 +8,12 @@
     <string name="remove">Remove</string>
     <string name="new_message_hint">New message text here...</string>
     <string name="edit">Edit</string>
+    <string name="chooser_share_post_string">Share post</string>
+    <string name="confirm_edited_text_string">Confirm edited text. Must not be empty.</string>
+    <string name="add_new_post_string">Add new post</string>
+    <string name="youtube_video_id" translatable="false">QUwPzUCjqO8</string>
+    <string name="youtube_query" translatable="false">https://www.youtube.com/watch?v=</string>
+    <string name="show_video_string">Show video</string>
 </resources>
 
 
