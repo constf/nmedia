@@ -4,107 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/edit_cancel_symbol"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/post_details"
         />
 
-
-    
-    <EditText
-        android:id="@+id/new_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/new_message_hint"
-        android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
-        android:importantForAutofill="no"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/post_add_image"
-        app:layout_constraintTop_toTopOf="@id/input_barrier"
-        app:layout_constraintEnd_toStartOf="@id/post_add_image"
-        android:layout_marginStart="16dp"
-
-        />
-
-
-    <ImageView
-        android:id="@+id/post_add_image"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:layout_marginEnd="16dp"
-
-        android:layout_marginTop="16dp"
-        />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/input_barrier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="new_content, post_add_image"
-        />
-
-    <TextView
-        android:id="@+id/edit_cancel_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edit_cancel_text"
-        app:layout_constraintTop_toTopOf="@id/edit_cancel_symbol"
-        app:layout_constraintEnd_toStartOf="@id/edit_cancel_symbol"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-
-        android:text="Edit message"
-        />
-    <TextView
-        android:id="@+id/edit_cancel_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:text="Here goes the text of the idited message, the really long line that can go for ages."
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/edit_cancel_symbol"
-        app:layout_constraintTop_toBottomOf="@id/edit_cancel_title"
-        app:layout_constraintEnd_toStartOf="@id/edit_cancel_symbol"
-        />
-    <ImageView
-        android:id="@+id/edit_cancel_symbol"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/input_barrier"
-        />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/edit_cancel_group"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_create_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="edit_cancel_title, edit_cancel_text, edit_cancel_symbol"
-        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_new_post_string"
+        style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
