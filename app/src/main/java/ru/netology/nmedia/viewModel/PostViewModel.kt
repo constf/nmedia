@@ -1,9 +1,12 @@
 package ru.netology.nmedia.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import ru.netology.nmedia.data.PostRepository
+import ru.netology.nmedia.data.impl.FileJsonPostRepository
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.SingleLiveEvent
 
@@ -19,8 +22,8 @@ val empty = Post(
 )
 
 
-class PostViewModel() : ViewModel() {
-    private val repository: PostRepository = InMemoryPostRepository()
+class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplication) {
+    private val repository: PostRepository = FileJsonPostRepository(inApplication)
     val data by repository::data
     val editedPost = MutableLiveData<Post?>(null)
     var tempText: String = ""
