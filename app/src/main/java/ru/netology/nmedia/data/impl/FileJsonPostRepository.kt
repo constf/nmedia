@@ -22,9 +22,6 @@ class FileJsonPostRepository(private var application: Application) : PostReposit
     private val typeTokenPost = TypeToken.getParameterized(List::class.java, Post::class.java).type
     // private val typeTokenLong = TypeToken.getParameterized(Long::class.java).type
 
-
-
-
     private var posts: List<Post>
         get() = checkNotNull(data.value) {
             "List of posts may not be null!"
@@ -37,7 +34,6 @@ class FileJsonPostRepository(private var application: Application) : PostReposit
             }
             data.value = value
         }
-
 
     override val data: MutableLiveData<List<Post>>
 
@@ -55,8 +51,6 @@ class FileJsonPostRepository(private var application: Application) : PostReposit
             }
         data = MutableLiveData(posts)
     }
-
-
 
 
     override fun like(id: Long) {
@@ -81,7 +75,6 @@ class FileJsonPostRepository(private var application: Application) : PostReposit
         }
         data.value = posts
     }
-
 
     override fun view(id: Long) {
         posts = posts.map {
