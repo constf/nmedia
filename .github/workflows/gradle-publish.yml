@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master, main, intents ]
+    branches: [ master, main, datapersistance ]
   pull_request:
-    branches: [ master, main, intents ]
+    branches: [ master, main, datapersistance ]
 
 
 jobs:
