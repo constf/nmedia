@@ -87,4 +87,9 @@ class InMemoryPostRepository : PostRepository {
         }
     }
 
+    override fun get(id: Long): Post? {
+        val post = posts.find { it.id == id}
+        return post
+    }
+
 }

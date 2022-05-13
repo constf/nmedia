@@ -111,6 +111,11 @@ class FileJsonPostRepository(private var application: Application) : PostReposit
         data.value = posts
     }
 
+    override fun get(id: Long): Post? {
+        val post = posts.find { it.id == id}
+        return post
+    }
+
     private companion object {
         const val POSTS_KEY = "posts"
         const val COUNTER_KEY = "counter"
