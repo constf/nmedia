@@ -12,4 +12,5 @@ interface PostRepository {
     fun view(id: Long)
     fun remove(id: Long)
     fun save(post: Post)
+    fun get(id: Long): Post?
 }

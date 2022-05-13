@@ -26,8 +26,8 @@ class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplica
     private val repository: PostRepository = FileJsonPostRepository(inApplication)
     val data by repository::data
     val editedPost = MutableLiveData<Post?>(null)
-    var tempText: String = ""
-    var editingNow: Boolean = false
+
+    val showPost = SingleLiveEvent<Post?>()
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostScreen = SingleLiveEvent<Unit>()
@@ -36,6 +36,8 @@ class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplica
     fun onLikeClicked(post: Post) = repository.like(post.id)
 
     fun onRemovePost(post: Post) = repository.remove(post.id)
+
+    fun getPost(id: Long) = repository.get(id)
 
     fun onShareClicked(post: Post) {
         sharePostContent.value = post.content
@@ -86,5 +88,8 @@ class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplica
         showExternalVideo.value = post
     }
 
+    fun onShowPostCard(post: Post) {
+        showPost.value = post
+    }
 
 }
