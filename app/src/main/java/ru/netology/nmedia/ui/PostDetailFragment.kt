@@ -7,17 +7,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import ru.netology.nmedia.databinding.PostDetailFragmentBinding
+import ru.netology.nmedia.viewModel.PostViewModel
 
 class PostDetailFragment : Fragment() {
 
     private var _binding: PostDetailFragmentBinding? = null
     private val binding get() = _binding!!
     private var caller: String? = null
+
+    private val viewModel by activityViewModels<PostViewModel>()
 
 
     override fun onCreateView(
@@ -30,6 +36,9 @@ class PostDetailFragment : Fragment() {
         val incomeArguments = getArguments()
         var textToEdit: String? = null
 
+        var callback: OnBackPressedCallback
+
+
         if (incomeArguments != null){
             caller = incomeArguments.getString(KEY_RESULT_TYPE)
             textToEdit = incomeArguments.getString(INCOMING_KEY, "")
@@ -37,6 +46,17 @@ class PostDetailFragment : Fragment() {
             caller = REQUEST_EDIT_KEY
             textToEdit = ""
         }
+
+        if (textToEdit!!.isBlank()) {
+            callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+                val outText = binding.editText.text
+                viewModel.draftContent = if (!outText.isNullOrBlank()) outText.toString() else null
+                parentFragmentManager.popBackStack()
+            }
+
+            textToEdit = viewModel.draftContent ?: ""
+        }
+
 
         binding.editText.setText(textToEdit)
 
@@ -57,6 +77,8 @@ class PostDetailFragment : Fragment() {
             resultBundle.putString(RESULT_KEY, content)
             setFragmentResult(caller!!, resultBundle)
         }
+
+        viewModel.draftContent = null
 
         parentFragmentManager.popBackStack()
     }
