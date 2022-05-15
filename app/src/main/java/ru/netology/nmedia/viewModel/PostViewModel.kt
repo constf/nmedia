@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FileJsonPostRepository
+import ru.netology.nmedia.data.impl.SQLitePostRepository
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.SingleLiveEvent
 
@@ -23,7 +25,11 @@ val empty = Post(
 
 
 class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplication) {
-    private val repository: PostRepository = FileJsonPostRepository(inApplication)
+    private val repository: PostRepository = SQLitePostRepository(
+        inApplication,
+        AppDb.getInstance(inApplication).postDao
+    )
+
     val data by repository::data
     val editedPost = MutableLiveData<Post?>(null)
 
@@ -32,6 +38,8 @@ class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplica
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostScreen = SingleLiveEvent<Unit>()
     val showExternalVideo = SingleLiveEvent<Post>()
+
+    var draftContent: String? = null
 
     fun onLikeClicked(post: Post) = repository.like(post.id)
 
@@ -77,7 +85,11 @@ class PostViewModel(val inApplication: Application) : AndroidViewModel(inApplica
             id = 0L,
             author = "Me",
             content = postContent,
-            published = "Today"
+            published = "Now",
+            numLikes = 999,
+            numShares = 9_999_995,
+            numViews = 23_195
+
         )
         repository.save(post)
 
