@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master, main, sqlite ]
+    branches: [ master, main, room ]
   pull_request:
-    branches: [ master, main, sqlite ]
+    branches: [ master, main, room ]
 
 
 jobs:

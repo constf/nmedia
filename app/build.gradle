@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -59,5 +60,10 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.4.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+
+    def room_ver = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_ver"
+    implementation "androidx.room:room-ktx:$room_ver"
+    kapt "androidx.room:room-compiler:$room_ver"
 
 }
