@@ -48,12 +48,19 @@ class FCMService: FirebaseMessagingService() {
         val newPost: NewPostParser = gson.fromJson(serializedContent, NewPostParser::class.java)
 
         val words = newPost.postContent.split(' ')
-        val shortText = words[0] + " " + words[1] + " " + words[2] + " " + words[3] + " " + words[4]
+        // val shortText = words[0] + " " + words[1] + " " + words[2] + " " + words[3] + " " + words[4]
+        val text = StringBuilder().apply {
+            val five = if (words.size < 5) words.size else 5
+            repeat(five){ i ->
+                append(words[i])
+                if (i < five-1) append(" ")
+            }
+        }.toString()
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(getString(R.string.notification_new_post, newPost.userName))
-            .setContentText(shortText)
+            .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(newPost.postContent))
             .build()
 
